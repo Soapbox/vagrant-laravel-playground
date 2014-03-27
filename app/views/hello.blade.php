@@ -21,9 +21,9 @@
 		</div>
 		<div>
 			<h2>Your server configuration</h2>
-			<pre>{{ print_r(Config::get('database', true)) }}</pre>
+			<pre>{{ print_r($_SERVER, true) }}</pre>
 			<h2>Your database configuration</h2>
-			<pre>{{ print_r($_SERVER, true) }}</p>
+			<pre>{{ print_r(Config::get('database'), true) }}</pre>
 		</div>
 	</div>
 

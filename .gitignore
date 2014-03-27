@@ -3,6 +3,7 @@
 /.vagrant
 /node_modules
 /bower_components
+/html
 composer.phar
 composer.lock
 .env.local.php

@@ -3,11 +3,9 @@
 echo " ------------ Running apt-get update... ------------ "
 sudo apt-get update
 
-# LAMP
+# Set MySQL password
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
-
-sudo rm -rf /var/www/html
 
 # PHP and Apache
 if [[ -z "$LAMP_INSTALLED" ]]; then
@@ -22,6 +20,7 @@ if [[ -z "$LAMP_INSTALLED" ]]; then
 	  php5-curl php5-gd php5-mcrypt php5-readline mysql-server-5.5 php5-mysql \
 	  git-core php5-xdebug
 
+# xdebug setup
 cat << EOF | sudo tee -a /etc/php5/mods-available/xdebug.ini
 xdebug.scream=1
 xdebug.cli_color=1
@@ -42,10 +41,14 @@ fi
 
 
 # Apache/MySQL configuration
+
 if [[ -z "$SERVER_CONFIGURED" ]]; then
+
+	echo " ------------ Configuring Apache... ------------ "
 
 	sudo a2enmod rewrite
 
+	# Always show all errors
 	sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/apache2/php.ini
 	sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/apache2/php.ini
 	sed -i "s/disable_functions = .*/disable_functions = /" /etc/php5/cli/php.ini
@@ -67,7 +70,7 @@ if [[ -z "$SERVER_CONFIGURED" ]]; then
 	sudo sed -i "s/AllowOverride None/AllowOverride All/g" /etc/apache2/apache2.conf
 	sudo sed -i "s/DocumentRoot .*/DocumentRoot \/var\/www\/public/" /etc/apache2/sites-available/000-default.conf
 
-
+	# Add vlplayground database
 	mysql -u root -proot < /var/www/setup.sql
 
 	sudo service apache2 restart
@@ -77,7 +80,12 @@ if [[ -z "$SERVER_CONFIGURED" ]]; then
 
 fi
 
+# Install composer
+
 if [[ -z "$COMPOSER_INSTALLED" ]]; then
+
+	echo " ------------ Installing Composer... ------------ "
+
 	curl -sS https://getcomposer.org/installer | php
 	sudo mv composer.phar /usr/local/bin/composer
 	echo "export COMPOSER_INSTALLED=true" >> /etc/profile
@@ -85,7 +93,10 @@ fi
 
 # HHVM for super-fast PHP Commands
 # https://github.com/facebook/hhvm/wiki/Building-and-installing-HHVM-on-Ubuntu-12.04
+
 if [[ -z "$HHVM_INSTALLED" ]]; then
+
+	echo " ------------ Installing HHVM... ------------ "
 
 	sudo add-apt-repository -y ppa:mapnik/boost
 	wget -O - http://dl.hhvm.com/conf/hhvm.gpg.key | sudo apt-key add -
@@ -96,4 +107,6 @@ if [[ -z "$HHVM_INSTALLED" ]]; then
 
 fi
 
+# Get rid of existing html folder
+sudo rm -rf /var/www/html
 source /etc/profile
