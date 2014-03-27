@@ -46,11 +46,26 @@ php artisan migrate
 
 Because `/var/www/` is shared between the VM and your local machine, any change you make while the VM is running will appear in either environment.
 
-For more Vagrant options, run
+You're now ready to view the site in your browser. Visit
+```
+http://192.168.50.5/
+```
+
+in your browser. If you want a nicer `.dev` URL, you can add this entry to your hosts file
+
+```
+192.168.50.5    vlplayground.dev
+```
+
+And visit `http://vlplayground.dev/` instead.
+
+For more about Vagrant and its options, run 
 
 ```
 vagrant --help
 ```
+
+from your terminal.
 
 ## Customising your Vagrant box (Advanced)
 
