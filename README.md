@@ -10,22 +10,21 @@ Make sure you have the required dependencies installed
 * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 * [Vagrant](http://www.vagrantup.com/downloads.html)
 
-Clone this repository to your local machine and start up Vagrant in the terminal.
+Clone this repository to your local machine
 
 ```
 git clone https://github.com/SoapBox/vagrant-laravel-playground.git
 ```
 
-
-Then navigate to the repo's folder and run
+Then navigate to the repo's folder and start up Vagrant
 
 ```
 vagrant up
 ```
 
-The `vagrant up` command will do a few things
+This command does a few things
 
-1. Download the VM Box specified in the Vagrantfile (in this case, the standard `hashicorp/precise64` box).
+1. Downloads the VM Box specified in the Vagrantfile (in this case, the standard `hashicorp/precise64` box).
 2. Boots up an instance of the VM, with a shared folder from the current local directory to the VM's `/var/www/` directory.
 3. Provisions the VM with the included `bootstrap.sh` script.
  - Installs Apache, MySQL, PHP, HHVM, and configures each one.
@@ -37,12 +36,20 @@ vagrant ssh
 ```
 
 
-You can then `cd` into the `/var/www/` folder and have full access to the Laravel project
+Then `cd` into the `/var/www/` shared folder to get full access to your Laravel project
 
 ```
 cd /var/www/
 composer install
 php artisan migrate
+```
+
+Because `/var/www/` is shared between the VM and your local machine, any change you make while the VM is running will appear in either environment.
+
+For more Vagrant options, run
+
+```
+vagrant --help
 ```
 
 ## Customising your Vagrant box (Advanced)
@@ -63,6 +70,7 @@ You can find additional boxes at https://vagrantcloud.com/discover/
 #### Notes
 * If you want to use a different Box provider such as VMWare, you'll have to do some [additional configuration in the Vagrantfile](https://docs.vagrantup.com/v2/providers/configuration.html).
 * The `bootstrap.sh` file will look radically different for different Linux distributions. It's up to you to write the best shell configuration for your environment.
+    - You can use [PuPHPet](https://puphpet.com/) for common distros.
 
 ### Configuring the Laravel app
 
@@ -77,7 +85,7 @@ $env = $app->detectEnvironment(array(
 ));
 ```
 
-The `local` environment gives you the option to run Artisan without having to SSH into the VM. `vagrant` will be the environment used while the app is running in the browser. Change the detection string for this to your new box's hostname, which you can find using this command:
+The `local` environment gives you the option to run Artisan without having to SSH into the VM. `vagrant` will be the environment used while the app is running in the browser. Change the detection string for this to your new box's hostname, which you can find using this command
 
 ```
 vagrant ssh -c hostname
@@ -85,8 +93,15 @@ vagrant ssh -c hostname
 
 * If you change the IP, sitename, or database settings update the configuration at `app/config/local` and `app/config/vagrant`.
 
-## Useful tools
+## Some useful tools
 
 * [PuPHPet](https://puphpet.com/) - Web-based Vagrant configuration
 * [Simon](https://github.com/SoapBox/simon) - Development interface we use at SoapBox to help us with Vagrant and our other development tools
 
+## Contributing
+
+Find a bug or an enhancement? Fork us and submit a pull request with your fix!
+
+***
+
+Copyright © 2014 SoapBox Innovations Inc.
