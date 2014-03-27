@@ -19,6 +19,12 @@
 				Thanks!
 			</button>
 		</div>
+		<div>
+			<h2>Your server configuration</h2>
+			<pre>{{ print_r(Config::get('database', true)) }}</pre>
+			<h2>Your database configuration</h2>
+			<pre>{{ print_r($_SERVER, true) }}</p>
+		</div>
 	</div>
 
 	<div id="youre-welcome-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
