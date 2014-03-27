@@ -1,0 +1,32 @@
+{
+  "name": "vagrant-laravel-playground",
+  "version": "0.0.1",
+  "authors": [
+    "SoapBox Innovations Inc. <dev@soapboxhq.com>"
+  ],
+  "description": "Test out a Laravel development environment, powered by Vagrant",
+  "main": "Gruntfile.js",
+  "keywords": [
+    "php",
+    "laravel",
+    "composer",
+    "vm",
+    "virtual",
+    "machine",
+    "composer",
+    "demo"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/SoapBox/vagrant-laravel-playground/",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.1.1"
+  }
+}
