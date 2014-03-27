@@ -1,0 +1,35 @@
+{
+  "name": "vagrant-laravel-playground",
+  "version": "0.0.1",
+  "description": "Test out a Laravel development environment, powered by Vagrant",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "node node_modules/grunt-cli/bin/grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SoapBox/vagrant-laravel-playground.git"
+  },
+  "keywords": [
+    "php",
+    "laravel",
+    "composer",
+    "vm",
+    "virtual",
+    "machine",
+    "composer",
+    "demo"
+  ],
+  "author": "SoapBox Innovations Inc. <dev@soapboxhq.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SoapBox/vagrant-laravel-playground/issues"
+  },
+  "homepage": "https://github.com/SoapBox/vagrant-laravel-playground",
+  "devDependencies": {
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-cli": "^0.1.13",
+    "grunt": "^0.4.4",
+    "grunt-contrib-jshint": "^0.9.2"
+  }
+}
